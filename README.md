@@ -24,9 +24,11 @@ this time.
 
 The API looks like
 
+```
 api = buildkite(auth)
 
 organzation\_api = api.organization()
 organizations = organization\_api.get()
 for organization in organizations:
     ...
+```
