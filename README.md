@@ -27,8 +27,8 @@ The API looks like
 ```
 api = buildkite(auth)
 
-organzation\_api = api.organization()
-organizations = organization\_api.get()
+organzation_api = api.organization()
+organizations = organization_api.get()
 for organization in organizations:
     ...
 ```
