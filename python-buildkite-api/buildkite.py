@@ -17,13 +17,20 @@ class Buildkite(BuildkiteBase):
 
     def build_request(self, url_pieces):
         url = self.url_parts()
-        for piece in url_pieces:
-            for part in self.api_objects[piece].url_parts():
-                url = '/'.join((url, part))
         parameters = []
-        for piece in url_pieces:
-            for part in self.api_objects[piece].url_parameters():
-                parameters.append(part)
+        for index, piece in enumerate(url_pieces):
+            protocol_object = self.api_objects.get(piece)
+            # If the last component isn't an object then treat it like
+            # a slug.
+            if not protocol_object and index == len(url_pieces) - 1:
+                url_parts = [piece]
+                parameter_parts = []
+            else:
+                url_parts = protocol_object.url_parts()
+                parameter_parts = protocol_object.url_parameters()
+            for part in url_parts:
+                url = '/'.join((url, part))
+            parameters.extend(parameter_parts)
         if parameters:
             url = url + '?' + ''.join(parameters)
         return url

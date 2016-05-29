@@ -17,8 +17,11 @@ class BuildkiteOrganizations(BuildkiteBase):
     def url_parameters(self):
         return []
 
-    def list(self):
-        url = self.parent_object.build_request(('auth', 'organizations'))
+    def list(self, org=None):
+        path_components = ['auth', 'organizations']
+        if org:
+            path_components.append(org)
+        url = self.parent_object.build_request(path_components)
         r = requests.get(url)
         return r.json()
 

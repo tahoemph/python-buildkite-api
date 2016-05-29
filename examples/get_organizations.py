@@ -7,3 +7,5 @@ organizations = api.organization().list()
 for organization in organizations:
     print organization
 
+organization = api.organization().list(org='saymedia')
+print organization
