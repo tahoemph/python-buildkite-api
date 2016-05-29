@@ -1,6 +1,7 @@
+from buildkite_base import BuildkiteBase
 import requests
 
-class BuildkiteOrganizations(object):
+class BuildkiteOrganizations(BuildkiteBase):
     def __init__(self):
         self.organization = None
 

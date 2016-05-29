@@ -1,9 +1,10 @@
 from buildkite_auth import BuildkiteAuth
+from buildkite_base import BuildkiteBase
 from buildkite_builds import BuildkiteBuilds
 from buildkite_organizations import BuildkiteOrganizations
 from buildkite_pipelines import BuildkitePipelines
 
-class Buildkite(object):
+class Buildkite(BuildkiteBase):
     def __init__(self):
         self.api_objects = {
             'auth': BuildkiteAuth(),

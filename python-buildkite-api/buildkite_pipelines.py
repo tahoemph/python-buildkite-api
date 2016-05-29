@@ -1,6 +1,7 @@
+from buildkite_base import BuildkiteBase
 import requests
 
-class BuildkitePipelines(object):
+class BuildkitePipelines(BuildkiteBase):
     def __init__(self):
         self.pipeline = None
 

@@ -1,4 +1,6 @@
-class BuildkiteAuth(object):
+from buildkite_base import BuildkiteBase
+
+class BuildkiteAuth(BuildkiteBase):
     def set_parent(self, parent):
         self.parent_object = parent
 
