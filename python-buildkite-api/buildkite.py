@@ -1,100 +1,7 @@
-import requests
-
-class BuildkiteAuth(object):
-    def set_parent(self, parent):
-        self.parent_object = parent
-
-    def access_token(self, t):
-        self.token = t
-
-    def url_parts(self):
-        return []
-
-    def url_parameters(self):
-        return ["access_token=" + self.token]
-
-
-class BuildkiteOrganizations(object):
-    def __init__(self):
-        self.organization = None
-
-    def set_parent(self, parent):
-        self.parent_object = parent
-
-    def url_parts(self):
-        rv = ["organizations"]
-        if self.organization:
-            rv.append(self.organization)
-        return rv
-
-    def url_parameters(self):
-        return []
-
-    def list(self):
-        url = self.parent_object.build_request(('auth', 'organizations'))
-        r = requests.get(url)
-        return r.json()
-
-    def set_organization(self, org):
-        self.organization = org
-        return self.parent_object
-
-
-class BuildkitePipelines(object):
-    def __init__(self):
-        self.pipeline = None
-
-    def set_parent(self, parent):
-        self.parent_object = parent
-
-    def url_parts(self):
-        rv = ["pipelines"]
-        if self.pipeline:
-            rv.append(self.pipeline)
-        return rv
-
-    def url_parameters(self):
-        return []
-
-    def list(self):
-        url = self.parent_object.build_request(('auth',
-                                                'organizations',
-                                                'pipelines'))
-        r = requests.get(url)
-        return r.json()
-
-    def set_pipeline(self, pipeline):
-        self.pipeline = pipeline
-        return self.parent_object
-
-
-class BuildkiteBuilds(object):
-    def __init__(self):
-        self.pipeline = None
-
-    def set_parent(self, parent):
-        self.parent_object = parent
-
-    def url_parts(self):
-        rv = ["builds"]
-        if self.pipeline:
-            rv.append(self.pipeline)
-        return rv
-
-    def url_parameters(self):
-        return []
-
-    # TODO: a protocol where if the sub-object (e.g. organization) doesn't
-    # have a parameter it does something reasonable (stays out of the way).
-    def list(self):
-        url = self.parent_object.build_request(('auth', 'builds'))
-        r = requests.get(url)
-        return r.json()
-
-    def set_pipeline(self, pipeline):
-        self.pipeline = pipeline
-        return self.parent_object
-
+from buildkite_auth import BuildkiteAuth
+from buildkite_builds import BuildkiteBuilds
+from buildkite_organizations import BuildkiteOrganizations
+from buildkite_pipelines import BuildkitePipelines
 
 class Buildkite(object):
     def __init__(self):
@@ -138,4 +45,3 @@ class Buildkite(object):
 
     def builds(self):
         return self.api_objects['builds']
-
