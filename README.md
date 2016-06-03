@@ -33,3 +33,13 @@ for build in builds:
 ```
 
 See the examples directory for more.
+
+Todo
+----
+
+* Tests
+* Other nouns
+* CLI
+* More example programs
+* Documentation
+* Python wrappers for returned objects
